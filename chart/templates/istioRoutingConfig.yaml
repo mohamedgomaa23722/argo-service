@@ -5,7 +5,7 @@ metadata:
   namespace: cloud-test
 spec:
   hosts:      # which incoming host are we applying the proxy rules to???
-    - {{ printf "%s.mg.com" $service }}
+    - {{ printf "%s.mg.com" ${service} }}
   gateways:
     - ingress-internal-gateway
   http:
