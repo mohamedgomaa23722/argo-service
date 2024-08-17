@@ -11,9 +11,9 @@ data:
   application.properties: |-
     server.port={{ .Values.port }}
     spring.application.name={{ .Values.name }}
-    {{- if .Values.payment.uri}}
+    {{- if .Values.payment}}
     com.mg.client.payment.uri={{ .Values.payment.uri }}
     {{- end}}
-    {{- if .Values.user.uri}}
+    {{- if .Values.user}}
     com.mg.client.user.uri={{ .Values.user.uri }}
     {{- end}}
