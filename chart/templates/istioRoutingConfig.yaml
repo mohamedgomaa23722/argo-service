@@ -1,32 +1,32 @@
 kind: VirtualService
 apiVersion: networking.istio.io/v1alpha3
 metadata:
-  name: {{ .Values.image.name }}-vs
+  name: {{ .Values.container.name }}-vs
   namespace: cloud-test
 spec:
   hosts:      # which incoming host are we applying the proxy rules to???
-    - {{ printf "%s.mg.com" .Values.image.name }}
+    - {{ printf "%s.mg.com" .Values.container.name }}
   gateways:
     - ingress-internal-gateway
   http:
     - match:
         - headers:  # IF
             service:
-              exact: {{ .Values.image.name }}
+              exact: {{ .Values.container.name }}
       route: # THEN
         - destination:
             host: {{ .Values.service.name }}-svc
-            subset: {{ .Values.image.name }}-sets
+            subset: {{ .Values.container.name }}-sets
 ---
 
 kind: DestinationRule
 apiVersion: networking.istio.io/v1alpha3
 metadata:
-  name: {{ .Values.image.name }}-dr
+  name: {{ .Values.container.name }}-dr
   namespace: cloud-test
 spec:
   host: {{ .Values.service.name }}-svc
   subsets:
     - labels:
-        app: {{ .Values.image.name }}
-      name: {{ .Values.image.name }}-sets
+        app: {{ .Values.templateApp }}
+      name: {{ .Values.container.name }}-sets
