@@ -1,18 +1,19 @@
+{{ $service:= .service}}
 kind: VirtualService
 apiVersion: networking.istio.io/v1alpha3
 metadata:
-  name: {{ .Values.container.name }}-vs
+  name: {{$service}}-vs
   namespace: cloud-test
 spec:
   hosts:      # which incoming host are we applying the proxy rules to???
-    - {{ printf "%s.mg.com" .Values.container.name }}
+    - {{ printf "%s.mg.com" $service }}
   gateways:
     - ingress-internal-gateway
   http:
     - match:
         - headers:  # IF
             service:
-              exact: {{ .Values.container.name }}
+              exact: {{ $service }}
       route: # THEN
         - destination:
             host: {{ .Values.service.name }}
@@ -22,7 +23,7 @@ spec:
 kind: DestinationRule
 apiVersion: networking.istio.io/v1alpha3
 metadata:
-  name: {{ .Values.container.name }}-dr
+  name: {{$service}}-dr
   namespace: cloud-test
 spec:
   host: {{ .Values.service.name }}
