@@ -15,7 +15,7 @@ spec:
               exact: {{ .Values.container.name }}
       route: # THEN
         - destination:
-            host: {{ .Values.service.name }}-svc
+            host: {{ .Values.service.name }}
             subset: {{ .Values.container.name }}-sets
 ---
 
@@ -25,7 +25,7 @@ metadata:
   name: {{ .Values.container.name }}-dr
   namespace: cloud-test
 spec:
-  host: {{ .Values.service.name }}-svc
+  host: {{ .Values.service.name }}
   subsets:
     - labels:
         app: {{ .Values.templateApp }}
