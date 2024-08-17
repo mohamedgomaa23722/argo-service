@@ -1,19 +1,19 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ $.Values.config.name }}
-  namespace: {{ $.Values.namespace }}
+  name: {{ .Values.config.name }}
+  namespace: {{ .Values.namespace }}
   labels:
-    group: {{ $.Values.group }}
-    stage: {{ $.Values.stage }}
+    group: {{ .Values.group }}
+    stage: {{ .Values.stage }}
 
 data:
   application.properties: |-
-    server.port={{ $.Values.port }}
-    spring.application.name={{ $.Values.name }}
-    {{- if $.Values.payment}}
-    com.mg.client.payment.uri={{ $.Values.payment.uri }}
+    server.port={{ .Values.port }}
+    spring.application.name={{ .Values.name }}
+    {{- if .Values.payment}}
+    com.mg.client.payment.uri={{ .Values.payment.uri }}
     {{- end}}
-    {{- if $.Values.user}}
-    com.mg.client.user.uri={{ $.Values.user.uri }}
+    {{- if .Values.user}}
+    com.mg.client.user.uri={{ .Values.user.uri }}
     {{- end}}
