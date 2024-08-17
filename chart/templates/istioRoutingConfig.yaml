@@ -2,7 +2,7 @@ kind: VirtualService
 apiVersion: networking.istio.io/v1alpha3
 metadata:
   name: {{ .Values.domain }}-vs
-  namespace: cloud-test
+  namespace: argocd
 spec:
   hosts:      # which incoming host are we applying the proxy rules to???
     - {{ printf "%s.mg.com" .Values.domain }}
@@ -23,7 +23,7 @@ kind: DestinationRule
 apiVersion: networking.istio.io/v1alpha3
 metadata:
   name: {{ .Values.domain }}-dr
-  namespace: cloud-test
+  namespace: argocd
 spec:
   host: {{ .Values.service.name }}
   subsets:
