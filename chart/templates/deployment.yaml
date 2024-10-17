@@ -23,6 +23,11 @@ spec:
             - mountPath: /opt/app/config
               name: {{ .Values.config.volume.name }}
               readOnly: true
+      {{if eq .Values.templateApp "user-template"}}        
+      initContainers:
+        - name: user-db-container
+          image: mohamedgomaa567/microservice-user-db:1
+      {{- end}}               
       volumes:
         - name: {{ .Values.config.volume.name }}
           configMap:
