@@ -1,3 +1,4 @@
+{{if eq .Values.templateApp "user-template"}} 
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -10,3 +11,4 @@ spec:
         image: mohamedgomaa567/microservice-user-db:1
       restartPolicy: Never
   backoffLimit: 4
+{{- end}}
